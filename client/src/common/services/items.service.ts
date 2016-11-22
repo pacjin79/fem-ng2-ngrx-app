@@ -1,11 +1,12 @@
-import {Http, Headers} from '@angular/http';
-import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
+import {Headers, Http} from '@angular/http';
+
 import {AppStore} from '../models/appstore.model';
+import {Injectable} from '@angular/core';
 import {Item} from '../models/item.model';
+import {Observable} from "rxjs/Observable";
+import {Store} from '@ngrx/store';
 
 const BASE_URL = 'http://localhost:3000/items/';
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
@@ -15,7 +16,7 @@ export class ItemsService {
   items: Observable<Array<Item>>;
 
   constructor(private http: Http, private store: Store<AppStore>) {
-    this.items = store.select('items');
+    this.items = store.select<Item[]>('items');
   }
 
   loadItems() {

@@ -1,11 +1,11 @@
+import {AppStore} from "../common/models/appstore.model";
+import {Component} from '@angular/core'
 import {Observable} from "rxjs/Observable";
 import {Store} from '@ngrx/store';
-import {Component} from '@angular/core'
-import {WidgetsService} from './../common/services/widgets.service.ts';
-import {WidgetsList} from './widgets-list.component';
-import {WidgetDetails} from './widget-details.component';
-import {AppStore} from "../common/models/appstore.model";
 import {Widget} from "../common/models/widget.model";
+import {WidgetDetails} from './widget-details.component';
+import {WidgetsList} from './widgets-list.component';
+import {WidgetsService} from './../common/services/widgets.service.ts';
 
 @Component({
   selector: 'widgets',
@@ -36,7 +36,7 @@ export class Widgets {
 
   constructor(private _widgetsService: WidgetsService,
     private _store: Store<AppStore>) {
-    this.selectedWidget = _store.select('selectedWidget');
+    this.selectedWidget = _store.select<Widget>('selectedWidget');
 
     _widgetsService.loadWidgets()
       .subscribe(
